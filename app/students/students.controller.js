@@ -5,12 +5,15 @@
 		.module('ngInterview.students')
 		.controller('StudentsController', StudentsController);
 
-	StudentsController.$inject = [];
-	function StudentsController() {
+	StudentsController.$inject = ['$scope', 'StudentsService'];
+	function StudentsController($scope, studentsService) {
 
 		/**
 		 * Model
 		 */
+        
+        $scope.expand = false;
+        
 
 		var vm = this;
 
@@ -23,9 +26,14 @@
 		/**
 		 * Implementations
 		 */
-
 		function activate() {
-			// Initialization code goes here
+			studentsService.getStudents().then(function(response) {
+                response.forEach(function(person) {
+                    person.FullName = person.FirstName + ' ' + person.LastName
+                })
+                $scope.students = response;
+            })
 		}
+
 	}
 })();

@@ -1,4 +1,13 @@
 <h2>Students</h2>
+<input type="text" ng-model="search.FullName">
 <ul>
-	<li>Here are your students...</li>
+	<li ng-repeat='student in students | filter:search' ng-click="expand = !expand">
+       <p><strong>{{student.FullName}}</strong></p>
+       <div ng-show="expand">
+               <p>ID: {{student.Id}}</p>
+               <p>Favorite Movie: {{student.FavoriteMovie}}</p>
+               <p>Favorite Food: {{student.FavoriteFood}}</p>
+               <p>Favorite Color: {{student.FavoriteColor}}</p>
+	   </div>
+    </li>
 </ul>
